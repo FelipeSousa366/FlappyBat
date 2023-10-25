@@ -30,14 +30,14 @@ class bat:
         self.x = x
         self.y = y
         self.angulo = 0
-        self.velocidade = 1
+        self.velocidade = 0.75
         self.altura = self.y
         self.tempo = 0
         self.contagem_imagem = 0
         self.imagem = self.IMGS[0]
 
     def pular(self):
-        self.velocidade = -10.5
+        self.velocidade = -8
         self.tempo = 0
         self.altura = self.y
 
@@ -47,8 +47,8 @@ class bat:
         deslocamento = 1.5 * (self.tempo**2) + self.velocidade * self.tempo
 
         # restringir o deslocamento
-        if deslocamento > 16:
-            deslocamento = 16
+        if deslocamento > 8:
+            deslocamento = 8
         elif deslocamento < 0:
             deslocamento -= 2
 
@@ -95,8 +95,8 @@ class bat:
 
 
 class Cano:
-    DISTANCIA = 200
-    VELOCIDADE = 5
+    DISTANCIA = 400
+    VELOCIDADE = 3
 
     def __init__(self, x):
         self.x = x
@@ -109,7 +109,7 @@ class Cano:
         self.definir_altura()
 
     def definir_altura(self):
-        self.altura = random.randrange(50, 450)
+        self.altura = random.randrange(50, 200)
         self.pos_topo = self.altura - self.CANO_TOPO.get_height()
         self.pos_base = self.altura + self.DISTANCIA
 
@@ -138,7 +138,7 @@ class Cano:
 
 
 class Chao:
-    VELOCIDADE = 5
+    VELOCIDADE = 3
     LARGURA = IMAGEM_CHAO.get_width()
     IMAGEM = IMAGEM_CHAO
 
@@ -222,10 +222,10 @@ def main():
 
         for i, morcego in enumerate(morcegos):
             if (morcego.y + morcego.imagem.get_height()) > chao.y or morcego.y < 0:
-                morcego.pop(i)
+                morcegos.pop(i)
 
         desenhar_tela(tela, morcegos, canos, chao, pontos)
 
 
 if __name__ == '__main__':
-    main()
+    main() 
